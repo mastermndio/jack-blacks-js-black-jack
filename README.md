@@ -18,3 +18,15 @@
 - [ ] When the player loses, moola needs to be removed from theit bankrol
 - [ ] We need to implement all of the logic of "21 or Bust" aka blackjack
 
+# Homework 1
+// Make a deck
+
+// Make a player
+
+// Have the player draw 2 cards
+
+// Have the player make a wager
+
+// Print out players hand
+
+// Print out wager amount
