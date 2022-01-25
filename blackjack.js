@@ -36,12 +36,13 @@ class Deck {
 class Player {
     constructor() {
         this.hand = []
+        this.score = 0
         this.money = 1000
         this.playAgain = false
         this.wager = 0
     }
 
-    wager() {
+    makeWager() {
         this.wager = Number(prompt("How much do you want to bet? "))
     }
 
@@ -49,34 +50,104 @@ class Player {
         if (this.hand.length >= 2) {
             let hitOrStay = prompt("Do you want to hit?(y/n) ")
             if (hitOrStay = "y") {
-                console.log("Player draws a card...")
+                console.log("Player is dealt a card...")
                 let newCard = deck.pop()
+                this.addCardValue(newCard)
                 this.hand.push(newCard)
             }
         } else {
-            console.log("Player draws a card...")
+            console.log("Player is dealt a card...")
             let newCard = deck.pop()
+
+            this.addCardValue(newCard)
             this.hand.push(newCard)
         }
+    }
+
+    dealOpeningHand() {
+        this.hit()
+        this.hit()
     }
 
     showHand() {
         console.log("The players hand...")
         console.log(this.hand)
     }
+    // '7 of Hearts '
+    addCardValue(card) {
+        let cardRank = card.split(" ")[0]
+
+        if (parseInt(cardRank) <= 10) {
+            this.score += parseInt(cardRank)
+        } else if (cardRank === 'Ace') {
+            if (this.score + 11 < 21) {
+                this.score += 11
+            } else {
+                this.score += 1
+            }
+        } else {
+            this.score += 10
+        }
+            
+    }
 }
 
+class Dealer {
+    constructor() {
+        this.hand = []
+        this.score = 0
+    }
+
+    hit() {
+        if (this.hand.length >= 2) {
+            let hitOrStay = prompt("Do you want to hit?(y/n) ")
+            if (hitOrStay == "y") {
+                console.log("Player is dealt a card...")
+                let newCard = deck.pop()
+                this.hand.push(newCard)
+            }
+        } else {
+            console.log("Player is dealt a card...")
+            let newCard = deck.pop()
+            this.hand.push(newCard)
+        }
+    }
+
+    dealOpeningHand() {
+        this.hit()
+        this.hit()
+    }
+
+    showHand() {
+        console.log("The dealer is showing the following...")
+        console.log(this.hand[0])
+    }
+}
+
+// GAME START
 // Make a deck
+let deck = new Deck()
+deck = deck.makeDeck()
 
-// Make a player
-
-// Have the player draw 2 cards
+// Make a player and dealer
+let player = new Player()
+let dealer = new Dealer()
 
 // Have the player make a wager
+player.makeWager()
 
-// Print out players hand
+// Deal hands to player and dealer
+player.dealOpeningHand()
+dealer.dealOpeningHand()
 
-// Print out wager amount
+player.showHand()
+console.log(player.score)
+// // Print out players hand
+// player.showHand()
+// dealer.showHand()
+
+
+
 
 
 
