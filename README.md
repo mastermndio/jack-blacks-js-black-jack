@@ -30,3 +30,15 @@
 // Print out players hand
 
 // Print out wager amount
+
+
+
+# Outstanding Issues
+
+- Running out of cards
+  - Return all cards to the deck after each hand
+  - When deck gets down to certain number of cards, restart/reshuffle deck
+  - Use more than one
+
+- We are currently keeping all cards between hands
+- Loops not breaking when they are supposed(When blackjack is recieved, game still continues)
